@@ -26,7 +26,7 @@
         .gold { color: #d4af37; }
         .pink-light { color: #fadadd; }
 
-        /* Page container - all with jungle green background */
+        /* Page container */
         .page {
             min-height: 100vh;
             width: 100%;
@@ -39,7 +39,6 @@
             overflow: hidden;
             background: #1a2e1a;
         }
-        /* subtle variation for depth */
         .page:nth-child(odd) { background: #1e3320; }
         .page:nth-child(even) { background: #1a2e1a; }
 
@@ -194,7 +193,7 @@
         }
         .nav-arrows i:hover, .nav-arrows i:active { opacity: 1; transform: scale(1.1); }
 
-        /* Gallery - Fantastic Layout */
+        /* Gallery */
         .gallery-container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -396,38 +395,143 @@
         }
         .compliment-text { font-size: 1.15rem; min-height: 60px; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; color: #fadadd; padding: 0 10px; }
 
-        .stars-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 15px 0; }
+        /* ===== CONSTELLATION STARS - UPDATED ===== */
+        .stars-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            margin: 20px 0;
+        }
         .star-memory {
             background: #1e2a1e;
-            width: 56px;
-            height: 56px;
+            width: 64px;
+            height: 64px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: #d4af37;
-            border: 1px solid #d4af37;
+            border: 2px solid #d4af37;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s ease;
             position: relative;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
             -webkit-tap-highlight-color: transparent;
         }
-        .star-memory:active { background: #d4af37; color: #1a2e1a; transform: scale(1.05); }
-        .star-memory .tooltip {
+        .star-memory:hover {
+            transform: scale(1.12) rotate(10deg);
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+            background: #d4af37;
+            color: #1a2e1a;
+        }
+        .star-memory:active {
+            transform: scale(0.95);
+        }
+        .star-memory .star-tooltip {
             display: none;
             position: absolute;
-            background: #1e2a1e;
-            padding: 6px 12px;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a2e1a;
+            padding: 8px 14px;
             border-radius: 30px;
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             color: #f0ebe3;
             border: 1px solid #d4af37;
-            bottom: 110%;
             white-space: nowrap;
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
         }
-        .star-memory:active .tooltip { display: block; }
+        .star-memory:hover .star-tooltip {
+            display: block;
+        }
 
+        /* Star clicked overlay - shows random photo */
+        .star-memory-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(10px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeInOverlay 0.5s ease;
+        }
+        .star-memory-overlay.active {
+            display: flex;
+        }
+        @keyframes fadeInOverlay {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .star-memory-overlay .overlay-content {
+            max-width: 600px;
+            width: 100%;
+            background: #1e2a1e;
+            border-radius: 30px;
+            padding: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.1);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .star-memory-overlay .overlay-content img {
+            width: 100%;
+            height: auto;
+            max-height: 60vh;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        .star-memory-overlay .overlay-content .memory-text {
+            margin-top: 16px;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: #fadadd;
+            text-align: center;
+            padding: 0 10px;
+            line-height: 1.6;
+        }
+        .star-memory-overlay .overlay-content .memory-text span {
+            color: #d4af37;
+            font-weight: 700;
+        }
+        .star-memory-overlay .close-overlay {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            font-size: 1.8rem;
+            color: #a09080;
+            cursor: pointer;
+            transition: 0.3s;
+            background: none;
+            border: none;
+            z-index: 5;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .star-memory-overlay .close-overlay:hover {
+            color: #d4af37;
+            transform: rotate(90deg);
+        }
+        .star-memory-overlay .photo-counter {
+            text-align: center;
+            color: #a09080;
+            font-size: 0.7rem;
+            margin-top: 10px;
+            letter-spacing: 2px;
+        }
+
+        /* Garden */
         .garden { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin: 14px 0; }
         .flower {
             background: #1e2a1e;
@@ -477,9 +581,11 @@
         }
         @media (max-width: 480px) {
             .page-indicator { bottom: 65px; font-size: 0.6rem; padding: 3px 12px; }
+            .star-memory { width: 54px; height: 54px; font-size: 1.4rem; }
+            .star-memory-overlay .overlay-content .memory-text { font-size: 0.95rem; }
         }
 
-        /* ========== BACKGROUND ANIMATIONS: JUNGLE GREEN WITH DARK BUTTERFLIES ========== */
+        /* ========== BACKGROUND ANIMATIONS ========== */
         .butterfly {
             position: fixed;
             pointer-events: none;
@@ -499,7 +605,6 @@
             100% { transform: translate(-5vw, -10vh) rotate(-30deg) scale(0.6); opacity: 0.05; }
         }
 
-        /* Subtle jungle light particles (like fireflies) */
         .firefly {
             position: fixed;
             pointer-events: none;
@@ -516,7 +621,6 @@
             100% { opacity: 0.6; transform: scale(1.8) translate(20px, -30px); }
         }
 
-        /* Falling petals (soft touch) */
         .petal {
             position: fixed;
             pointer-events: none;
@@ -622,7 +726,7 @@
     <!-- PAGE 6: LETTERS -->
     <div class="page" id="page6">
         <div class="container text-center">
-            <h2 class="serif gold" style="font-size:clamp(1.8rem, 4.5vw, 2.4rem);">💌 Tap to see Letters I Never Sent</h2>
+            <h2 class="serif gold" style="font-size:clamp(1.8rem, 4.5vw, 2.4rem);">💌 Letters I Never Sent</h2>
             <div class="envelope-shelf">
                 <div class="envelope" onclick="showLetter(0)">💌 #1</div>
                 <div class="envelope" onclick="showLetter(1)">💌 #2</div>
@@ -647,12 +751,23 @@
         </div>
     </div>
 
-    <!-- PAGE 8: CONSTELLATION -->
+    <!-- PAGE 8: CONSTELLATION - UPDATED WITH RANDOM PHOTO FEATURE -->
     <div class="page" id="page8">
         <div class="container text-center">
             <h2 class="serif gold" style="font-size:clamp(1.8rem, 4.5vw, 2.4rem);">🌌 Constellation of Memories</h2>
+            <p style="color:#b0a090; margin-bottom:12px; font-style:italic; font-size:clamp(0.85rem, 1.5vw, 1rem);">✨ Click a star to reveal a random memory with a photo</p>
             <div class="stars-container" id="starsContainer"></div>
             <div class="nav-arrows"><i class="fas fa-chevron-left" onclick="goToPage(7)"></i><i class="fas fa-chevron-right" onclick="goToPage(9)"></i></div>
+        </div>
+    </div>
+
+    <!-- Star Memory Overlay (hidden by default) -->
+    <div class="star-memory-overlay" id="starOverlay" onclick="closeStarOverlay(event)">
+        <div class="overlay-content" onclick="event.stopPropagation();">
+            <button class="close-overlay" onclick="closeStarOverlay()">✕</button>
+            <img id="starPhoto" src="" alt="Memory photo">
+            <div class="memory-text" id="starMemoryText">✨ <span>Ishmael</span></div>
+            <div class="photo-counter" id="starCounter">Photo 1 / 40</div>
         </div>
     </div>
 
@@ -812,7 +927,7 @@
             document.getElementById('complimentText').textContent = '🌸 ' + compliments[rand];
         }
 
-        // ---------- CONSTELLATION ----------
+        // ---------- CONSTELLATION - RANDOM PHOTO ON STAR CLICK ----------
         const starMemories = [
             "The day we laughed until we couldn't breathe.",
             "The first time I realized how much you meant to me.",
@@ -823,16 +938,85 @@
             "That sunset we shared.",
             "Your voice when you said my name.",
             "The little things you do that stay with me.",
-            "Every moment with you was a gift."
+            "Every moment with you was a gift.",
+            "Your smile still lights up my world.",
+            "I remember how happy you were that day.",
+            "You made everything feel possible.",
+            "That moment I knew you were special.",
+            "I wish I could relive this memory."
         ];
+
+        // Store all photo numbers in an array for random selection
+        const photoNumbers = Array.from({length: 40}, (_, i) => i + 1);
+
+        // Function to get a random photo number (different each time)
+        function getRandomPhoto() {
+            const randomIndex = Math.floor(Math.random() * photoNumbers.length);
+            return photoNumbers[randomIndex];
+        }
+
+        // Function to open the overlay with random photo
+        function openRandomMemory(starText) {
+            const overlay = document.getElementById('starOverlay');
+            const photoImg = document.getElementById('starPhoto');
+            const memoryText = document.getElementById('starMemoryText');
+            const counter = document.getElementById('starCounter');
+
+            // Get random photo number
+            const photoNum = getRandomPhoto();
+            const photoPath = `photo${photoNum}.jpg`;
+
+            // Set the photo
+            photoImg.src = photoPath;
+            photoImg.alt = `Memory ${photoNum}`;
+            photoImg.onerror = function() {
+                this.src = ''; // Clear broken image
+                this.alt = '📷 Photo not found';
+                this.style.display = 'none';
+                // Show fallback
+                document.querySelector('.star-memory-overlay .overlay-content .memory-text').innerHTML = 
+                    '✨ <span>Ishmael</span> — Photo not found, but the memory remains.';
+            };
+            photoImg.style.display = 'block';
+
+            // Set the memory text
+            memoryText.innerHTML = `✨ <span>Ishmael</span> — ${starText}`;
+
+            // Update counter
+            counter.textContent = `📷 Photo ${photoNum} / 40`;
+
+            // Show overlay with animation
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close overlay function
+        function closeStarOverlay(event) {
+            // If event is click on overlay background, close it
+            if (event && event.target !== event.currentTarget) return;
+
+            const overlay = document.getElementById('starOverlay');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeStarOverlay();
+            }
+        });
+
+        // Build stars
         const starsContainer = document.getElementById('starsContainer');
         starMemories.forEach((mem) => {
             const star = document.createElement('div');
             star.className = 'star-memory';
-            star.innerHTML = `⭐ <span class="tooltip">${mem}</span>`;
+            star.innerHTML = `⭐ <span class="star-tooltip">${mem}</span>`;
             star.addEventListener('click', function(e) {
                 e.stopPropagation();
-                alert('⭐ ' + mem);
+                // Open random photo with this memory text
+                openRandomMemory(mem);
             });
             starsContainer.appendChild(star);
         });
@@ -857,7 +1041,7 @@
         setInterval(createButterfly, 3500);
         for (let i = 0; i < 5; i++) setTimeout(createButterfly, i * 1000);
 
-        // ---------- FIREFLIES (subtle jungle glow) ----------
+        // ---------- FIREFLIES ----------
         function createFirefly() {
             const firefly = document.createElement('div');
             firefly.className = 'firefly';
@@ -872,7 +1056,7 @@
         setInterval(createFirefly, 2000);
         for (let i = 0; i < 8; i++) setTimeout(createFirefly, i * 300);
 
-        // ---------- FALLING PETALS (soft romance) ----------
+        // ---------- PETALS ----------
         function createPetal() {
             const petal = document.createElement('div');
             petal.className = 'petal';
